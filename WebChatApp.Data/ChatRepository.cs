@@ -8,11 +8,22 @@ namespace WebChatApp.Data
 {
     public class ChatRepository : IChatRepository
     {
-        public int AddChat(ChatEntity chatDto) 
+        ApplicationContext db;
+
+        public ChatRepository(ApplicationContext context)
         {
-            int id=0;
-            return id;
-        
+            db = context;
+        }
+        public int AddChat(ChatEntity chat) 
+        {
+            ChatEntity newChat = new ChatEntity();
+            newChat.Type= chat.Type;
+            newChat.UserCreatorId = chat.UserCreatorId;
+
+            db.Chats.Add(newChat);
+            db.SaveChanges();
+            return newChat.Id;
+
         }
         public ChatEntity GetChatById(int id) 
         {

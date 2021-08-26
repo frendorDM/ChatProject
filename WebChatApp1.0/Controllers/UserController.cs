@@ -27,9 +27,29 @@ namespace WebChatApp1._0.Controllers
         public UserController(IUserRepository userService) 
         {
             _service = userService;
-        
         }
 
+        // https://localhost:44365/api/user/42
+        /// <summary>Get info of user</summary>
+        /// <param name="userId">Id of user</param>
+        /// <returns>Info of user</returns>
+        [ProducesResponseType(typeof(UserOutputDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [HttpGet("{userId}")]
+        //[Authorize]
+        public ActionResult<UserOutputDto> GetUser(int userId)
+        {
+            var user = _service.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound($"User with id {userId} is not found");
+            }
+
+            //var outputModel = _mapper.Map<UserOutputModel>(user);
+            //return Ok(outputModel);
+            return Ok();
+        }
         [HttpGet("current")]
         //[Authorize]
         public ActionResult<UserOutputDto> GetCurrentUser()

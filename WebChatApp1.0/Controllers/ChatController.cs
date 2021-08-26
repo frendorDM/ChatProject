@@ -12,15 +12,17 @@ namespace WebChatApp1._0.Controllers
     // https://localhost:44365/api/chat/
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class ChatController : ControllerBase
     {
         private IChatRepository _service;
+        private IMapper _mapper;
         //private IUserService _userService;
 
-        public ChatController(IChatRepository chatService)
+        public ChatController(IChatRepository chatService, IMapper mapper)
         {
             _service = chatService;
+            _mapper = mapper;
             //_userService = userService;
         }
         /// <summary>
@@ -33,13 +35,14 @@ namespace WebChatApp1._0.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpPost]
-        [Authorize]
-       //public ActionResult<ChatOutputDto> AddNewChat([FromBody] ChatInputDto chat)
-       //{
-       //    //var addedChatId = _service.AddChat(_mapper.Map<Chat>(chat)); //в сервисы убрать
-       //    //var result = _mapper.Map<ChatOutputDto>(_service.GetChatById(addedChatId)); //в сервисы убрать 
-       //    //return Ok(result);
-       //}
+        //[Authorize]
+       public ActionResult<int> AddNewChat([FromBody] ChatInputDto chat)
+       {
+            var addedChatId = _service.AddChat(_mapper.Map<ChatEntity>(chat)); //в сервисы убрать
+            //var result = _mapper.Map<ChatOutputDto>(_service.GetChatById(addedChatId)); //в сервисы убрать 
+            //return Ok(result);
+            return Ok(addedChatId);
+        }
         // можно сделать 3 контроллера на создание комнат. 3 вида комнат, актоматически заполнять поле Тип Чата.
         // убрать id из ассациативнаых таблиц. Добавить таблицу блок позователей. С датой начала блока и временем блока. Chek is bloked user
         // можно выгнать пользователя по DateTime(MAX)
@@ -54,7 +57,7 @@ namespace WebChatApp1._0.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpPut("id")]
-        [Authorize]
+        //[Authorize]
         public ActionResult<ChatOutputDto> UpdateChatName(int id, [FromBody] ChatInputDto chat) 
         {
 

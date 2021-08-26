@@ -14,6 +14,8 @@ namespace WebChatApp1._0.Models.InputModels
         [Required]
         [Range(1, 3)]
         public int Type { get; set; }
+        public int Bybe { get; set; }
+
         public List<int> Users { get; set; }
         public List<MessageInputDto> Messages { get; set; }
     }

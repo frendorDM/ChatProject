@@ -11,6 +11,7 @@ namespace WebChatApp.Models.Entities
         public int UserCreatorId { get; set; }
         public int Type { get; set; }
         public int Bybe { get; set; }
+        
 
         public List<UserEntity> Users { get; set; } = new List<UserEntity>();
         public List<MessageEntity> Messages { get; set; } = new List<MessageEntity>();

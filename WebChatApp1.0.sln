@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChatApp.API", "WebChatApp1.0\WebChatApp.API.csproj", "{CEFC9CE0-E092-450A-952F-FFC9949B8E3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChatApp.Models", "WebChatApp.Models\WebChatApp.Models.csproj", "{679EAFF8-AFA9-4FD9-8EF6-85B79E0E6DCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChatApp.Data", "WebChatApp.Data\WebChatApp.Data.csproj", "{813D8DE0-FBA6-49C6-AB16-BDA03A71D747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChatApp.ServicesApp", "WebChatApp.ServicesApp\WebChatApp.ServicesApp.csproj", "{D78220D5-57A3-40DE-BB30-44FA2892B110}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEFC9CE0-E092-450A-952F-FFC9949B8E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEFC9CE0-E092-450A-952F-FFC9949B8E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEFC9CE0-E092-450A-952F-FFC9949B8E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEFC9CE0-E092-450A-952F-FFC9949B8E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679EAFF8-AFA9-4FD9-8EF6-85B79E0E6DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679EAFF8-AFA9-4FD9-8EF6-85B79E0E6DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679EAFF8-AFA9-4FD9-8EF6-85B79E0E6DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679EAFF8-AFA9-4FD9-8EF6-85B79E0E6DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813D8DE0-FBA6-49C6-AB16-BDA03A71D747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813D8DE0-FBA6-49C6-AB16-BDA03A71D747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813D8DE0-FBA6-49C6-AB16-BDA03A71D747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813D8DE0-FBA6-49C6-AB16-BDA03A71D747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78220D5-57A3-40DE-BB30-44FA2892B110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78220D5-57A3-40DE-BB30-44FA2892B110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78220D5-57A3-40DE-BB30-44FA2892B110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78220D5-57A3-40DE-BB30-44FA2892B110}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA6CAF0D-E021-4285-BE46-396827D75740}
+	EndGlobalSection
+EndGlobal

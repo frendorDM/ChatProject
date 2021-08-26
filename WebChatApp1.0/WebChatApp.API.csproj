@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>WebChatApp1._0</RootNamespace>
+    <UserSecretsId>b534fe0c-2367-48ef-a664-4b8690ee5cc4</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebChatApp.Data\WebChatApp.Data.csproj" />
+    <ProjectReference Include="..\WebChatApp.Models\WebChatApp.Models.csproj" />
+    <ProjectReference Include="..\WebChatApp.ServicesApp\WebChatApp.ServicesApp.csproj" />
+  </ItemGroup>
+
+
+</Project>

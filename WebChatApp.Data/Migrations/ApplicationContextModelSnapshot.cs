@@ -19,7 +19,7 @@ namespace WebChatApp.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AccessRuleRole", b =>
+            modelBuilder.Entity("AccessRuleEntityRoleEntity", b =>
                 {
                     b.Property<int>("AccessRulesId")
                         .HasColumnType("int");
@@ -31,10 +31,10 @@ namespace WebChatApp.Data.Migrations
 
                     b.HasIndex("RolesId");
 
-                    b.ToTable("AccessRuleRole");
+                    b.ToTable("AccessRuleEntityRoleEntity");
                 });
 
-            modelBuilder.Entity("ChatUser", b =>
+            modelBuilder.Entity("ChatEntityUserEntity", b =>
                 {
                     b.Property<int>("ChatsId")
                         .HasColumnType("int");
@@ -46,10 +46,10 @@ namespace WebChatApp.Data.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ChatUser");
+                    b.ToTable("ChatEntityUserEntity");
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("RoleEntityUserEntity", b =>
                 {
                     b.Property<int>("RolesId")
                         .HasColumnType("int");
@@ -61,10 +61,10 @@ namespace WebChatApp.Data.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("RoleUser");
+                    b.ToTable("RoleEntityUserEntity");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.AccessRule", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.AccessRuleEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,15 +79,12 @@ namespace WebChatApp.Data.Migrations
                     b.ToTable("AccessRules");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.Chat", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.ChatEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Bybe")
-                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -100,7 +97,7 @@ namespace WebChatApp.Data.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.Message", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.MessageEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +128,7 @@ namespace WebChatApp.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.Role", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.RoleEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +143,7 @@ namespace WebChatApp.Data.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.User", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,60 +177,60 @@ namespace WebChatApp.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AccessRuleRole", b =>
+            modelBuilder.Entity("AccessRuleEntityRoleEntity", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.AccessRule", null)
+                    b.HasOne("WebChatApp.Models.Entities.AccessRuleEntity", null)
                         .WithMany()
                         .HasForeignKey("AccessRulesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebChatApp.Models.Entities.Role", null)
+                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ChatUser", b =>
+            modelBuilder.Entity("ChatEntityUserEntity", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.Chat", null)
+                    b.HasOne("WebChatApp.Models.Entities.ChatEntity", null)
                         .WithMany()
                         .HasForeignKey("ChatsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebChatApp.Models.Entities.User", null)
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("RoleEntityUserEntity", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.Role", null)
+                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebChatApp.Models.Entities.User", null)
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.Message", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.MessageEntity", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.Chat", "Chat")
+                    b.HasOne("WebChatApp.Models.Entities.ChatEntity", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebChatApp.Models.Entities.User", "User")
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId");
 
@@ -242,12 +239,12 @@ namespace WebChatApp.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.Chat", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.ChatEntity", b =>
                 {
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("WebChatApp.Models.Entities.User", b =>
+            modelBuilder.Entity("WebChatApp.Models.Entities.UserEntity", b =>
                 {
                     b.Navigation("Messages");
                 });

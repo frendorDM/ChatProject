@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WebChatApp.Data;
 using WebChatApp.Models.Entities;
+using WebChatApp.ServicesApp;
 using WebChatApp1._0.Models.InputModels;
 using WebChatApp1._0.Models.OutputModels;
 
@@ -11,15 +13,17 @@ namespace WebChatApp1._0.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class MessageController : ControllerBase
     {
-        private IChatRepository _service;
+        private IMessageService _service;
+        private IMapper _mapper;
 
 
-        public MessageController(IChatRepository messageService, IMapper mapper) 
+        public MessageController(IMessageService messageService, IMapper mapper) 
         {
-            _service = messageService;       
+            _service = messageService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -30,16 +34,13 @@ namespace WebChatApp1._0.Controllers
         // https://localhost:/api/chat/message
         [ProducesResponseType(typeof(MessageOutputDto), StatusCodes.Status200OK)]
         [HttpPost]
-        [Authorize]
-        public ActionResult<MessageOutputDto> AddMessage([FromBody] MessageInputDto messageInputModel)
+        //[Authorize]
+        public ActionResult<int> AddMessage([FromBody] MessageInputDto messageInputDto)
         {
-
-            //var messageDto = _mapper.Map<Message>(messageInputModel);
-            //var newEntityId = _service.AddMessage(messageDto);
+            var newEntityId = _service.AddMessage(messageInputDto);
             //var newMessageDto = _service.GetMessageById(newEntityId);
             //var result = _mapper.Map<MessageOutputDto>(newMessageDto);
-            //return Ok(result);
-            return Ok();
+            return Ok(newEntityId);  
         }
 
         /// <summary>
@@ -51,13 +52,31 @@ namespace WebChatApp1._0.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        //[Authorize(Roles = "Администратор, Модератор")]
         public ActionResult DeleteMessage(int id)
         {
             //if (_service.GetMessageById(id) is null)
             //    return NotFound($"Message {id} not found");
             //_service.DeleteMessageById(id);
             return NoContent();
+        }
+
+        // https://localhost:/api/message/by-chat/2
+        /// <summary>Get all message related to chat</summary>
+        /// <param name="id">Id of chat, which chat is needed</param>
+        /// <returns>List of message to chat</returns>
+        [ProducesResponseType(typeof(List<MessageOutputDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [HttpGet("by-chat/{id}")]
+        //[Authorize]
+        public ActionResult<List<MessageOutputDto>> GetMessagesByChatId(int id)
+        {
+            //if (_serviceGroup.GetChatById(id) is null)
+            //    return NotFound($"Chat {id} not found");
+            var listMessage = _service.GetMaterialsByGroupId(id);
+            return Ok(listMessage);
+
         }
     }
 }

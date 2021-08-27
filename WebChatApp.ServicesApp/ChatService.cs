@@ -1,27 +1,32 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using WebChatApp.Data;
 using WebChatApp.Models.Entities;
+using WebChatApp1._0.Models.InputModels;
 
 namespace WebChatApp.ServicesApp
 {
     public class ChatService : IChatService
     {
         private IChatRepository _chatRepository;
+        private IMapper _mapper;
 
-        public ChatService(IChatRepository chatRepository)
+        public ChatService(IChatRepository chatRepository, IMapper mapper)
         {
             _chatRepository = chatRepository;
+            _mapper = mapper;
         }
         public ChatEntity GetChatById(int id)
         {
             var dto = _chatRepository.GetChatById(id);
             return dto;
         }
-        public int AddChat(ChatEntity chatDto)
+        public int AddChat(ChatInputDto chatDto)
         {
-            return _chatRepository.AddChat(chatDto);
+            var chatModel = _mapper.Map<ChatEntity>(chatDto);
+            return _chatRepository.AddChat(chatModel);
         }
         public int UpdateChat(ChatEntity chatDto)
         {

@@ -47,6 +47,7 @@ namespace WebChatApp1._0.Controllers
             }
 
             //var outputModel = _mapper.Map<UserOutputModel>(user);
+            //
             //return Ok(outputModel);
             return Ok();
         }

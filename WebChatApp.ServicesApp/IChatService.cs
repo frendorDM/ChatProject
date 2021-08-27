@@ -1,5 +1,6 @@
 ﻿using System;
 using WebChatApp.Models.Entities;
+using WebChatApp1._0.Models.InputModels;
 
 namespace WebChatApp.ServicesApp
 {
@@ -7,7 +8,7 @@ namespace WebChatApp.ServicesApp
     {
         public ChatEntity GetChatById(int id);
 
-        public int AddChat(ChatEntity chatDto);
+        public int AddChat(ChatInputDto chatDto);
 
         public int UpdateChat(ChatEntity chatDto);
 

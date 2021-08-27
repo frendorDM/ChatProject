@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebChatApp.Data;
 using WebChatApp.Models.Entities;
+using WebChatApp.ServicesApp;
 using WebChatApp1._0.Models.InputModels;
 using WebChatApp1._0.Models.OutputModels;
 
@@ -15,16 +15,15 @@ namespace WebChatApp1._0.Controllers
     //[Authorize]
     public class ChatController : ControllerBase
     {
-        private IChatRepository _service;
+        private IChatService _service;
         private IMapper _mapper;
-        //private IUserService _userService;
 
-        public ChatController(IChatRepository chatService, IMapper mapper)
+        public ChatController(IChatService chatService, IMapper mapper)
         {
             _service = chatService;
             _mapper = mapper;
-            //_userService = userService;
         }
+
         /// <summary>
         /// Creates Chat
         /// </summary>
@@ -38,7 +37,7 @@ namespace WebChatApp1._0.Controllers
         //[Authorize]
        public ActionResult<int> AddNewChat([FromBody] ChatInputDto chat)
        {
-            var addedChatId = _service.AddChat(_mapper.Map<ChatEntity>(chat)); //в сервисы убрать
+            var addedChatId = _service.AddChat(chat);
             //var result = _mapper.Map<ChatOutputDto>(_service.GetChatById(addedChatId)); //в сервисы убрать 
             //return Ok(result);
             return Ok(addedChatId);
@@ -69,8 +68,6 @@ namespace WebChatApp1._0.Controllers
             //_service.UpdateChat(chatDto);
             //var result = _mapper.Map<ChatOutputDto>(_service.GetChatById(id));
             return Ok();
-
-
         }
     }
 }

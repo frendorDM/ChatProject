@@ -2,9 +2,8 @@
 
 namespace WebChatApp.Models.Entities
 {
-    public class AccessRuleEntity
+    public class AccessRuleEntity : EntityBaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public List<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
         

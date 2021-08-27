@@ -32,6 +32,7 @@ namespace WebChatApp.Data
         }
         public List<MessageEntity> GetMaterialsByGroupId(int id) 
         {
+            return null;
         
         }
     }

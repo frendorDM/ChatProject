@@ -34,7 +34,7 @@ namespace WebChatApp.ServicesApp
         {
 
             var messages = _messageRepository.GetMaterialsByGroupId(id);
-            return _mapper.Map<List<MaterialOutputModel>>(messages);
+            return null; //_mapper.Map<List<MaterialOutputModel>>(messages);
         }
     }
 }

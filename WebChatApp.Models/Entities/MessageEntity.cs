@@ -4,9 +4,8 @@ using System.Text;
 
 namespace WebChatApp.Models.Entities
 {
-    public class MessageEntity
+    public class MessageEntity : EntityBaseEntity
     {
-        public int Id { get; set; }
         public string Text { get; set; }
         public int ChatId { get; set; }
         public int UserCreatorId { get; set; }

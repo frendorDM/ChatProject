@@ -5,9 +5,8 @@ using WebChatApp.Models.RelationShip;
 
 namespace WebChatApp.Models.Entities
 {
-    public class UserEntity 
+    public class UserEntity : EntityBaseEntity
     {
-        public int Id { get; set; }
 
         [StringLength(50)]
         public string FirstName { get; set; }

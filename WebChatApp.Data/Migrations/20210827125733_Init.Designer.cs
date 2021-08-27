@@ -10,8 +10,8 @@ using WebChatApp.Data;
 namespace WebChatApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210827094613_RemovedСolumnBybeFromTableChat")]
-    partial class RemovedСolumnBybeFromTableChat
+    [Migration("20210827125733_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -8,33 +8,31 @@ using WebChatApp1._0.Models.InputModels;
 
 namespace WebChatApp.ServicesApp
 {
-    public class ChatService : IChatService
+    public class ChatService // : IChatService
     {
-        private IChatRepository _chatRepository;
         private IMapper _mapper;
 
-        public ChatService(IChatRepository chatRepository, IMapper mapper)
+        public ChatService(IMapper mapper)
         {
-            _chatRepository = chatRepository;
             _mapper = mapper;
         }
-        public ChatEntity GetChatById(int id)
-        {
-            var dto = _chatRepository.GetChatById(id);
-            return dto;
-        }
-        public int AddChat(ChatInputDto chatDto)
-        {
-            var chatModel = _mapper.Map<ChatEntity>(chatDto);
-            return _chatRepository.AddChat(chatModel);
-        }
-        public int UpdateChat(ChatEntity chatDto)
-        {
-            return _chatRepository.UpdateChat(chatDto);
-        }
-        public int DeleteChat(int id)
-        {
-            return _chatRepository.DeleteChat(id);
-        }
+        //public ChatEntity GetChatById(int id)
+        //{
+        //    var dto = _chatRepository.GetChatById(id);
+        //    return dto;
+        //}
+        //public int AddChat(ChatInputDto chatDto)
+        //{
+        //    var chatModel = _mapper.Map<ChatEntity>(chatDto);
+        //    return _chatRepository.AddChat(chatModel);
+        //}
+        //public int UpdateChat(ChatEntity chatDto)
+        //{
+        //    return _chatRepository.UpdateChat(chatDto);
+        //}
+        //public int DeleteChat(int id)
+        //{
+        //    return _chatRepository.DeleteChat(id);
+        //}
     }
 }

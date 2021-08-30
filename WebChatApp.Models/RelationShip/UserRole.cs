@@ -5,7 +5,7 @@ using WebChatApp.Models.Entities;
 
 namespace WebChatApp.Models.RelationShip
 {
-    public class UserRole : EntityBaseEntity
+    public class UserRole : BaseEntity
     {
         public int UserId { get; set; }
         public int RoleId { get; set; }

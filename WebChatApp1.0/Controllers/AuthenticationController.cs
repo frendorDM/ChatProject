@@ -11,12 +11,9 @@ namespace WebChatApp1._0.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private IChatRepository _service;
         
-        public AuthenticationController(IChatRepository authenticationService) 
-        {
-            _service = authenticationService;
-        
+        public AuthenticationController() 
+        {        
         }
 
         [HttpPost]

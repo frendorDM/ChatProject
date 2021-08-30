@@ -5,7 +5,7 @@ using WebChatApp.Models.RelationShip;
 
 namespace WebChatApp.Models.Entities
 {
-    public class UserEntity : EntityBaseEntity
+    public class UserEntity : BaseEntity
     {
 
         [StringLength(50)]
@@ -22,13 +22,13 @@ namespace WebChatApp.Models.Entities
         [StringLength(50)]
         public string Password { get; set; }
 
-        public bool isBlocked { get; set; }
+        public bool IsBlocked { get; set; }
 
-        public List<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
+        public List<UserRole> Roles { get; set; }
 
-        public List<ChatEntity> Chats { get; set; } = new List<ChatEntity>();
+        public List<UserChat> Chats { get; set; }
 
-        public List<MessageEntity> Messages { get; set; } = new List<MessageEntity>();
+        public List<MessageEntity> Messages { get; set; }
 
     }
 }

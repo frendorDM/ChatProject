@@ -5,13 +5,13 @@ using WebChatApp.Models.RelationShip;
 
 namespace WebChatApp.Models.Entities
 {
-    public class ChatEntity : EntityBaseEntity
+    public class ChatEntity : BaseEntity
     {
-        public int UserCreatorId { get; set; }
+        public int? UserCreatorId { get; set; }
         public int Type { get; set; }
-        
 
-        public List<UserEntity> Users { get; set; } = new List<UserEntity>();
-        public List<MessageEntity> Messages { get; set; } = new List<MessageEntity>();
+        public UserEntity UserCreator { get; set; }
+        public List<UserChat> Users { get; set; }
+        public List<MessageEntity> Messages { get; set; }
     }
 }

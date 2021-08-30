@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using WebChatApp.Data;
 using WebChatApp.Models;
 using WebChatApp.Models.Entities;
-
+using WebChatApp.ServicesApp;
 using WebChatApp1._0.Models.InputModels;
 using WebChatApp1._0.Models.OutputModels;
 
@@ -22,9 +22,9 @@ namespace WebChatApp1._0.Controllers
     //[Authorize]
     public class UserController : ControllerBase
     {
-        private IUserRepository _service;
+        private IUserService _service;
 
-        public UserController(IUserRepository userService) 
+        public UserController(IUserService userService) 
         {
             _service = userService;
         }

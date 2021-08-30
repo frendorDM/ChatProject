@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using WebChatApp.Models.RelationShip;
 
 namespace WebChatApp.Models.Entities
 {
-    public class AccessRuleEntity : EntityBaseEntity
+    public class AccessRuleEntity : BaseEntity
     {
         public string Name { get; set; }
-        public List<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
-        
+        public List<RoleAccessRule> Roles { get; set; }      
     }
 }

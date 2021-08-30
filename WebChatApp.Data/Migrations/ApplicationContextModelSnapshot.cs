@@ -15,61 +15,16 @@ namespace WebChatApp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AccessRuleEntityRoleEntity", b =>
-                {
-                    b.Property<int>("AccessRulesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccessRulesId", "RolesId");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("AccessRuleEntityRoleEntity");
-                });
-
-            modelBuilder.Entity("ChatEntityUserEntity", b =>
-                {
-                    b.Property<int>("ChatsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ChatsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ChatEntityUserEntity");
-                });
-
-            modelBuilder.Entity("RoleEntityUserEntity", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RolesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RoleEntityUserEntity");
-                });
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("WebChatApp.Models.Entities.AccessRuleEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -84,15 +39,17 @@ namespace WebChatApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserCreatorId")
+                    b.Property<int?>("UserCreatorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserCreatorId");
 
                     b.ToTable("Chats");
                 });
@@ -102,10 +59,13 @@ namespace WebChatApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("ChatId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -113,17 +73,11 @@ namespace WebChatApp.Data.Migrations
                     b.Property<int>("UserCreatorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserCreatorId");
 
                     b.ToTable("Messages");
                 });
@@ -133,7 +87,7 @@ namespace WebChatApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +102,7 @@ namespace WebChatApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -156,6 +110,9 @@ namespace WebChatApp.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50)
@@ -169,57 +126,85 @@ namespace WebChatApp.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("isBlocked")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AccessRuleEntityRoleEntity", b =>
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.RoleAccessRule", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.AccessRuleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("AccessRulesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("AccessRuleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccessRuleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RoleAccessRules");
                 });
 
-            modelBuilder.Entity("ChatEntityUserEntity", b =>
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.UserChat", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.ChatEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ChatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.HasOne("WebChatApp.Models.Entities.UserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserChats");
                 });
 
-            modelBuilder.Entity("RoleEntityUserEntity", b =>
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.UserRole", b =>
                 {
-                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.HasOne("WebChatApp.Models.Entities.UserEntity", null)
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("WebChatApp.Models.Entities.ChatEntity", b =>
+                {
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "UserCreator")
                         .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserCreatorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("UserCreator");
                 });
 
             modelBuilder.Entity("WebChatApp.Models.Entities.MessageEntity", b =>
@@ -230,23 +215,100 @@ namespace WebChatApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "User")
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "UserCreator")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserCreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
+
+                    b.Navigation("UserCreator");
+                });
+
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.RoleAccessRule", b =>
+                {
+                    b.HasOne("WebChatApp.Models.Entities.AccessRuleEntity", "AccessRule")
+                        .WithMany("Roles")
+                        .HasForeignKey("AccessRuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", "Role")
+                        .WithMany("AccessRules")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AccessRule");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.UserChat", b =>
+                {
+                    b.HasOne("WebChatApp.Models.Entities.ChatEntity", "Chat")
+                        .WithMany("Users")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "User")
+                        .WithMany("Chats")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Chat");
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WebChatApp.Models.RelationShip.UserRole", b =>
+                {
+                    b.HasOne("WebChatApp.Models.Entities.RoleEntity", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebChatApp.Models.Entities.UserEntity", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebChatApp.Models.Entities.AccessRuleEntity", b =>
+                {
+                    b.Navigation("Roles");
+                });
+
             modelBuilder.Entity("WebChatApp.Models.Entities.ChatEntity", b =>
                 {
                     b.Navigation("Messages");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebChatApp.Models.Entities.RoleEntity", b =>
+                {
+                    b.Navigation("AccessRules");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("WebChatApp.Models.Entities.UserEntity", b =>
                 {
+                    b.Navigation("Chats");
+
                     b.Navigation("Messages");
+
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }
